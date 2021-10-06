@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jugadores</title>
+    <link rel="icon" href="assets/img/M.png" sizes="16x16" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+    <div class="container-fluid pt-3">
+        <div class="row gy-3">
+            <div class="col-sm-3">
+                <label for="" class="fw-bold">Busca por tu tag de jugador:</label>
+                <div class="input-group flex-nowrap mb-3">
+                    <input type="text" class="form-control" id="tag"  placeholder="#FDSF345" aria-label="Username" aria-describedby="addon-wrapping">
+                    <span class="input-group-text" style="cursor: pointer;" id="addon-wrapping"><a href="#" id="enviar"><i class='bx bx-search-alt'></i></a></span>
+                  </div>
+                <div class="card shadow p-2 text-center">
+                        <b><h5 class="my-0" id="nombre"></h5></b>
+                        <small class="mt-0" id="idJugador"></small> 
+                         <span> <i class='bx bx-trophy'></i> <span id="descripcionTrofeos">selvatica-6633</span></span>
+                        <span> <i class='bx bxs-shield-alt-2'></i> <span id="descripcionClan">Arequipa - 5263</span> </span>
+                        <hr>
+                    <b><h5>Estadisticas</h5></b>
+                   <span class="text-start ms-2"><i class='bx bx-badge-check'></i><b>insignias</b> </span>
+                   <div id="insignias">
+
+                   </div>
+                    <span class="text-start ms-2"><i class='bx bx-trophy'></i>Trofeos : <span id="trofeos"></span></span>
+                    <span class="text-start ms-2"><i class='bx bx-check-circle'></i>Victorias : <span id="victorias"></span></span>
+                    <span class="text-start ms-2"><i class='bx bx-check-circle'></i>Victorias en guerra : <span id="victoriaGuerra"></span></span>
+                    <span class="text-start ms-2"><i class='bx bx-x'></i>Perdidas : <span id="perdidas"></span></span>
+                    <span class="text-start ms-2"><i class='bx bx-trophy'></i>Maximo de Victorias : <span id="maxVictorias"></span></span>
+                    <span class="text-start ms-2"><i class='bx bx-diamond'></i>total de batallas : <span id="batallas"></span></span>
+                </div>
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <img src="img/M.svg" class="rounded me-2" alt="...">
+                      <strong class="me-auto">Miguel Mendoza</strong>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      Hola, estas estadisticas son mias, pero tu puedes ver tus propias estadisticas con tu tag, esta información esta actualizada gracias a la API <a href="https://developer.clashroyale.com/ ">clashroyaleAPI</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-sm-9">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Mazo</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Cofres siguientes</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Historial de Batallas</button>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card" >
+                                    <div class="card-header text-center">Carta Favorita</div>
+                                    <div class="card-body">
+                                        <img src="" id="imgFavorita" class="img-fluid">
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-8" >
+                                <div class="card">
+                                    <div class="card-header text-center">Mazo Favorito</div>
+                                    <div class="card-body">
+                                        <div id="colleccionMazoFav" class="row gx-1">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="row gy-3" id="chest">
+                            
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <div class="row" id="batallasHechas">
+                            
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <template>
+        <div class="row mb-2">
+            
+            <div class="text-end mt-0">
+                <span class="badge rounded-pill" id="descBat"></span> <span id="cantidad"></span>
+                <i class='bx bx-trophy text-warning'></i>
+            </div>
+            <div class="col-5" id="yo">
+                <div class="text-center"> <span class="fw-bold" id="tagYo"></span> </div>
+                <div class="row g-1">
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                </div>
+            </div>
+            <div class="col-2 my-auto text-center"> 
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-lg-8">
+                        <div class="text-center">
+                            <img src="https://i.pinimg.com/originals/03/ca/85/03ca852c2d14b703a883ba22209f0b71.png" width="250px" class="img-fluid text-center" alt="" >
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row d-flex justify-content-between">
+                    <div class="col-6 ratio-16x9">
+                        <i class='bx bxs-crown bx-sm text-primary' ></i><br><span id="coronasYo"></span>
+                    </div>
+                    <div class="col-6 ratio-16x9">
+                        <i class='bx bxs-crown bx-sm text-danger ' ></i><br><span id="coronasOponente"></span>
+                    </div>  
+                </div>
+            </div>
+            <div class="col-5" id="oponente">
+                <div class="text-center"> <sp class="fw-bold" id="tagOponente"></sp     an></div>
+                <div class="row g-1">
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class= "img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                    <div class="col-3"><img src="" class="img-fluid" alt=""></div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </template>
+    <img src="" alt="">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="assets/js/jugadores.js"></script>
+</body>
+</html>
